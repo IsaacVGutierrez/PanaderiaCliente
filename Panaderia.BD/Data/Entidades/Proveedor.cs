@@ -28,6 +28,14 @@ namespace Panaderia.BD.Data.Entidades
         [MaxLength(12, ErrorMessage = "El Telefono no debe superar los 12 caracteres")]
         public int Telefono { get; set; }
 
+        [Required]
+        [MaxLength(10, ErrorMessage = "La Fecha no debe superar los 10 caracteres")]
+        public DateTime FechaEntrega { get; set; }
+
+
+        [Required(ErrorMessage = "El Encargado es obligatorio")]
+        public int EncargadoId { get; set; }
+        public Encargado Encargado { get; set; }
 
 
     }

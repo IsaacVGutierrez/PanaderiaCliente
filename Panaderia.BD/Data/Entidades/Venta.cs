@@ -33,5 +33,10 @@ namespace Panaderia.BD.Data.Entidades
         [MaxLength(10, ErrorMessage = "La Fecha no debe superar los 10 caracteres")]
         public DateTime FechaVenta { get; set; }
 
+        public List<Producto> Productos { get; set; }
+
+
+
+
     }
 }
