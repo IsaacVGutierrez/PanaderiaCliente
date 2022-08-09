@@ -33,8 +33,15 @@ namespace Panaderia.BD.Data.Entidades
         [MaxLength(10, ErrorMessage = "La Fecha no debe superar los 10 caracteres")]
         public DateTime FechaVenta { get; set; }
 
-        public List<Producto> Productos { get; set; }
 
+
+        [Required(ErrorMessage = "El Producto es obligatorio")]
+        public int ProductoId { get; set; }
+        public Empleado Producto { get; set; }
+
+
+        public List<Producto> Productos { get; set; }
+        public List<Empleado> Empleados { get; set; }
 
 
 

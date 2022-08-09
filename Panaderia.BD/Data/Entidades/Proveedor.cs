@@ -37,6 +37,8 @@ namespace Panaderia.BD.Data.Entidades
         public int EncargadoId { get; set; }
         public Encargado Encargado { get; set; }
 
+        public List<Encargado> Encargados { get; set; }
+
 
     }
 }
