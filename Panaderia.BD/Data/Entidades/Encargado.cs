@@ -48,5 +48,7 @@ namespace Panaderia.BD.Data.Entidades
         public DateTime FechaInicioEncargado { get; set; }
 
 
+        public List<Proveedor> Proveedores { get; set; }
+
     }
 }

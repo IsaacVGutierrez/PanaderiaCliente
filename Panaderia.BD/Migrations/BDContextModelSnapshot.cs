@@ -24,14 +24,11 @@ namespace Panaderia.BD.Migrations
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Cargo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("EmpleadoId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<string>("NombreCargo")
                         .IsRequired()
@@ -40,24 +37,24 @@ namespace Panaderia.BD.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "EmpleadoId", "Id" }, "EmpleadoCargoId_UQ")
-                        .IsUnique();
-
                     b.ToTable("Cargos");
                 });
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Empleado", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<string>("ApellidoEmpleado")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<int?>("CargoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("DNIEmpleado")
                         .HasMaxLength(9)
@@ -81,16 +78,13 @@ namespace Panaderia.BD.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<string>("PuestoCargoEmpleado")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<int>("TelefonoEmpleado")
+                    b.Property<long>("TelefonoEmpleado")
                         .HasMaxLength(12)
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CargoId");
 
                     b.HasIndex(new[] { "DNIEmpleado" }, "EmpleadoDNI_UQ")
                         .IsUnique();
@@ -100,11 +94,11 @@ namespace Panaderia.BD.Migrations
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Encargado", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<string>("ApellidoEncargado")
                         .IsRequired()
@@ -152,11 +146,11 @@ namespace Panaderia.BD.Migrations
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Producto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<int>("CantidadProduc")
                         .HasMaxLength(10)
@@ -194,11 +188,11 @@ namespace Panaderia.BD.Migrations
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Proveedor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<int>("DNIProved")
                         .HasMaxLength(9)
@@ -242,11 +236,11 @@ namespace Panaderia.BD.Migrations
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Venta", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<int>("CantidadVenta")
                         .HasMaxLength(10)
@@ -256,12 +250,20 @@ namespace Panaderia.BD.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("int");
 
+                    b.Property<int>("CuotasVenta")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
                     b.Property<int>("EmpleadoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FechaVenta")
                         .HasMaxLength(10)
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("InteresVenta")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
 
                     b.Property<int>("PrecioVenta")
                         .HasMaxLength(10)
@@ -277,15 +279,13 @@ namespace Panaderia.BD.Migrations
                     b.ToTable("Ventas");
                 });
 
-            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Cargo", b =>
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Empleado", b =>
                 {
-                    b.HasOne("Panaderia.BD.Data.Entidades.Empleado", "Empleado")
-                        .WithMany("Cargos")
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Panaderia.BD.Data.Entidades.Cargo", "Cargo")
+                        .WithMany("Empleados")
+                        .HasForeignKey("CargoId");
 
-                    b.Navigation("Empleado");
+                    b.Navigation("Cargo");
                 });
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Producto", b =>
@@ -298,7 +298,7 @@ namespace Panaderia.BD.Migrations
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Proveedor", b =>
                 {
                     b.HasOne("Panaderia.BD.Data.Entidades.Encargado", "Encargado")
-                        .WithMany()
+                        .WithMany("Proveedores")
                         .HasForeignKey("EncargadoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -321,9 +321,14 @@ namespace Panaderia.BD.Migrations
                     b.Navigation("Empleados");
                 });
 
-            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Empleado", b =>
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Cargo", b =>
                 {
-                    b.Navigation("Cargos");
+                    b.Navigation("Empleados");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Encargado", b =>
+                {
+                    b.Navigation("Proveedores");
                 });
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Producto", b =>

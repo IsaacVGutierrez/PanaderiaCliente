@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace Panaderia.BD.Data.Entidades
 {
 
-    [Index(nameof(EmpleadoId), nameof(Id) ,Name = "EmpleadoCargoId_UQ", IsUnique = true)]
-
+    
     public class Cargo : EntityBase
     {
 
@@ -18,12 +17,8 @@ namespace Panaderia.BD.Data.Entidades
         [MaxLength(20, ErrorMessage = "El Nombre Cargo no debe superar los 20 caracteres")]
         public string NombreCargo { get; set; }
 
+           
+        public List<Empleado> Empleados { get; set; }
 
-        [Required(ErrorMessage = "El Empleado es obligatorio")]
-        public int EmpleadoId { get; set; }
-        public Empleado Empleado { get; set; }
-
-
-             
     }
 }

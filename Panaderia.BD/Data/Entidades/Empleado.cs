@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panaderia.BD.Data.Entidades
 {
@@ -30,13 +25,10 @@ namespace Panaderia.BD.Data.Entidades
         [MaxLength(2, ErrorMessage = "La Edad no debe superar los 2 caracteres")]
         public int EdadEmpleado { get; set; }
 
-        [Required]
-        [MaxLength(10, ErrorMessage = "El Puesto no debe superar los 10 caracteres")]
-        public string PuestoCargoEmpleado { get; set; }
-
+        
         [Required]
         [MaxLength(12, ErrorMessage = "El Telefono no debe superar los 12 caracteres")]
-        public int TelefonoEmpleado { get; set; }
+        public long TelefonoEmpleado { get; set; }
 
         [Required]
         [MaxLength(30, ErrorMessage = "La Direccion no debe superar los 30 caracteres")]
@@ -47,7 +39,10 @@ namespace Panaderia.BD.Data.Entidades
         [MaxLength(10, ErrorMessage = "La Fecha no debe superar los 10 caracteres")]
         public DateTime FechaContratoEmpleado { get; set; }
 
-        public List<Cargo> Cargos { get; set; }
+
+        //[Required(ErrorMessage = "El Cargo es obligatorio")]
+        public int? CargoId { get; set; }
+        public Cargo Cargo { get; set; }
 
 
 

@@ -28,6 +28,12 @@ namespace Panaderia.BD.Data.Entidades
         public DateTime FechaVenta { get; set; }
 
 
+        [MaxLength(10, ErrorMessage = "Las Cuotas de Venta no debe superar los 10 caracteres")]
+        public int CuotasVenta { get; set; }
+
+        [MaxLength(10, ErrorMessage = "El interes de venta no debe superar los 10 caracteres")]
+        public int InteresVenta { get; set; }
+
         [Required]
         [MaxLength(10, ErrorMessage = "El Precio de Venta no debe superar los 15 caracteres")]
         public int PrecioVenta { get; set; }

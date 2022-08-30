@@ -1,18 +1,34 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Panaderia.BD.Data;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddControllersWithViews().AddJsonOptions(
+    x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles );
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-var conn = builder.Configuration.GetConnectionString("con");
-builder.Services.AddDbContext<BDContext>(opciones =>
 
-opciones.UseSqlServer(conn));
+
+var conn = builder.Configuration.GetConnectionString("con");
+builder.Services.AddDbContext<BDContext>(opciones => opciones.UseSqlServer(conn));
+
+builder.Services.AddSwaggerGen(c=>
+{
+
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Negocio", Version = "v1" });
+});
+
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json" ,
+    "Negocio v1"));
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

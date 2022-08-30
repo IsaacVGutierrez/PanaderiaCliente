@@ -12,8 +12,8 @@ using Panaderia.BD.Data;
 namespace Panaderia.BD.Migrations
 {
     [DbContext(typeof(BDContext))]
-    [Migration("20220809083724_indices")]
-    partial class indices
+    [Migration("20221003084128_solucion")]
+    partial class solucion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,61 +26,52 @@ namespace Panaderia.BD.Migrations
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Cargo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
-                    b.Property<int>("EmpleadoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EncargadoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NombrCargo")
+                    b.Property<string>("NombreCargo")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "EmpleadoId", "Id" }, "EmpleadoCargoId_UQ")
-                        .IsUnique();
-
-                    b.HasIndex(new[] { "EncargadoId", "Id" }, "EncargadoCargoId_UQ")
-                        .IsUnique();
-
                     b.ToTable("Cargos");
                 });
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Empleado", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
-                    b.Property<string>("ApellidoEncargado")
+                    b.Property<string>("ApellidoEmpleado")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("DNI")
+                    b.Property<int?>("CargoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DNIEmpleado")
                         .HasMaxLength(9)
                         .HasColumnType("int");
 
-                    b.Property<string>("Direccion")
+                    b.Property<string>("DireccionEmpleado")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("Edad")
+                    b.Property<int>("EdadEmpleado")
                         .HasMaxLength(2)
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaContrato")
+                    b.Property<DateTime>("FechaContratoEmpleado")
                         .HasMaxLength(10)
                         .HasColumnType("datetime2");
 
@@ -89,18 +80,15 @@ namespace Panaderia.BD.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<string>("PuestoCargo")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<int>("Telefono")
+                    b.Property<long>("TelefonoEmpleado")
                         .HasMaxLength(12)
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "DNI" }, "EmpleadoDNI_UQ")
+                    b.HasIndex("CargoId");
+
+                    b.HasIndex(new[] { "DNIEmpleado" }, "EmpleadoDNI_UQ")
                         .IsUnique();
 
                     b.ToTable("Empleados");
@@ -108,31 +96,31 @@ namespace Panaderia.BD.Migrations
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Encargado", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<string>("ApellidoEncargado")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("DNI")
+                    b.Property<int>("DNIEncargado")
                         .HasMaxLength(9)
                         .HasColumnType("int");
 
-                    b.Property<string>("Direccion")
+                    b.Property<string>("DireccionEncargado")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("Edad")
+                    b.Property<int>("EdadEncargado")
                         .HasMaxLength(2)
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaInicio")
+                    b.Property<DateTime>("FechaInicioEncargado")
                         .HasMaxLength(10)
                         .HasColumnType("datetime2");
 
@@ -141,18 +129,18 @@ namespace Panaderia.BD.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<string>("PuestoCargo")
+                    b.Property<string>("PuestoCargoEncargado")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("Telefono")
+                    b.Property<int>("TelefonoEncargado")
                         .HasMaxLength(12)
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "DNI" }, "EncargadoDNI_UQ")
+                    b.HasIndex(new[] { "DNIEncargado" }, "EncargadoDNI_UQ")
                         .IsUnique();
 
                     b.ToTable("Encargados");
@@ -160,78 +148,11 @@ namespace Panaderia.BD.Migrations
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Producto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Codigo")
-                        .HasMaxLength(30)
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("FechaVencimiento")
-                        .HasMaxLength(10)
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("Precio")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "Codigo" }, "ProductoCodigo_UQ")
-                        .IsUnique();
-
-                    b.ToTable("Productos");
-                });
-
-            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Proveedor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("DNI")
-                        .HasMaxLength(9)
-                        .HasColumnType("int");
-
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<int>("Telefono")
-                        .HasMaxLength(12)
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex(new[] { "DNI" }, "ProveedorDNI_UQ")
-                        .IsUnique();
-
-                    b.ToTable("Proveedores");
-                });
-
-            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Venta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
 
                     b.Property<int>("CantidadProduc")
                         .HasMaxLength(10)
@@ -241,7 +162,7 @@ namespace Panaderia.BD.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FechaVenta")
+                    b.Property<DateTime>("FechaVencimientoProduc")
                         .HasMaxLength(10)
                         .HasColumnType("datetime2");
 
@@ -254,41 +175,172 @@ namespace Panaderia.BD.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("int");
 
+                    b.Property<int?>("VentaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "CodigoProduc" }, "CodigoProducVenta_UQ")
+                    b.HasIndex("VentaId");
+
+                    b.HasIndex(new[] { "CodigoProduc" }, "ProductoCodigo_UQ")
+                        .IsUnique();
+
+                    b.ToTable("Productos");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Proveedor", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+
+                    b.Property<int>("DNIProved")
+                        .HasMaxLength(9)
+                        .HasColumnType("int");
+
+                    b.Property<string>("DireccionProved")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("EncargadoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaEntregaProved")
+                        .HasMaxLength(10)
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NombreProved")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<int?>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TelefonoProved")
+                        .HasMaxLength(12)
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EncargadoId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.HasIndex(new[] { "DNIProved" }, "ProveedorDNI_UQ")
+                        .IsUnique();
+
+                    b.ToTable("Proveedores");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Venta", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"), 1L, 1);
+
+                    b.Property<int>("CantidadVenta")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodigoVenta")
+                        .HasMaxLength(30)
+                        .HasColumnType("int");
+
+                    b.Property<int>("CuotasVenta")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmpleadoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaVenta")
+                        .HasMaxLength(10)
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("InteresVenta")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrecioVenta")
+                        .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpleadoId");
+
+                    b.HasIndex(new[] { "CodigoVenta" }, "CodigoProducVenta_UQ")
                         .IsUnique();
 
                     b.ToTable("Ventas");
                 });
 
-            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Cargo", b =>
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Empleado", b =>
                 {
-                    b.HasOne("Panaderia.BD.Data.Entidades.Empleado", "Empleado")
-                        .WithMany("Cargos")
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Panaderia.BD.Data.Entidades.Cargo", "Cargo")
+                        .WithMany("Empleados")
+                        .HasForeignKey("CargoId");
 
+                    b.Navigation("Cargo");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Producto", b =>
+                {
+                    b.HasOne("Panaderia.BD.Data.Entidades.Venta", null)
+                        .WithMany("Productos")
+                        .HasForeignKey("VentaId");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Proveedor", b =>
+                {
                     b.HasOne("Panaderia.BD.Data.Entidades.Encargado", "Encargado")
-                        .WithMany("Cargos")
+                        .WithMany("Proveedores")
                         .HasForeignKey("EncargadoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Empleado");
+                    b.HasOne("Panaderia.BD.Data.Entidades.Producto", null)
+                        .WithMany("Proveedores")
+                        .HasForeignKey("ProductoId");
 
                     b.Navigation("Encargado");
                 });
 
-            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Empleado", b =>
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Venta", b =>
                 {
-                    b.Navigation("Cargos");
+                    b.HasOne("Panaderia.BD.Data.Entidades.Empleado", "Empleados")
+                        .WithMany()
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Empleados");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Cargo", b =>
+                {
+                    b.Navigation("Empleados");
                 });
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Encargado", b =>
                 {
-                    b.Navigation("Cargos");
+                    b.Navigation("Proveedores");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Producto", b =>
+                {
+                    b.Navigation("Proveedores");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Venta", b =>
+                {
+                    b.Navigation("Productos");
                 });
 #pragma warning restore 612, 618
         }

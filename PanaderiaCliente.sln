@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanaderiaCliente.Server", "PanaderiaCliente\Server\PanaderiaCliente.Server.csproj", "{8B90DDCA-DE65-43A5-A15B-2F458EAE59BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PanaderiaCliente.Server", "PanaderiaCliente\Server\PanaderiaCliente.Server.csproj", "{8B90DDCA-DE65-43A5-A15B-2F458EAE59BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanaderiaCliente.Client", "PanaderiaCliente\Client\PanaderiaCliente.Client.csproj", "{000DA009-DBD3-49C6-9CA2-C7485EF7C24D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PanaderiaCliente.Client", "PanaderiaCliente\Client\PanaderiaCliente.Client.csproj", "{000DA009-DBD3-49C6-9CA2-C7485EF7C24D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PanaderiaCliente.Shared", "PanaderiaCliente\Shared\PanaderiaCliente.Shared.csproj", "{9C233ABC-9F6D-4F32-A879-9B93169887B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PanaderiaCliente.Shared", "PanaderiaCliente\Shared\PanaderiaCliente.Shared.csproj", "{9C233ABC-9F6D-4F32-A879-9B93169887B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panaderia.BD", "Panaderia.BD\Panaderia.BD.csproj", "{96DB5150-F88E-41DC-9315-89044FC0198A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panaderia.BD", "Panaderia.BD\Panaderia.BD.csproj", "{96DB5150-F88E-41DC-9315-89044FC0198A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
