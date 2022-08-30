@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Panaderia.BD.Data;
 
@@ -11,9 +12,10 @@ using Panaderia.BD.Data;
 namespace Panaderia.BD.Migrations
 {
     [DbContext(typeof(BDContext))]
-    partial class BDContextModelSnapshot : ModelSnapshot
+    [Migration("20220816145454_nombres")]
+    partial class nombres
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +35,9 @@ namespace Panaderia.BD.Migrations
                     b.Property<int>("EmpleadoId")
                         .HasColumnType("int");
 
+                    b.Property<int>("EncargadoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("NombreCargo")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -41,6 +46,9 @@ namespace Panaderia.BD.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex(new[] { "EmpleadoId", "Id" }, "EmpleadoCargoId_UQ")
+                        .IsUnique();
+
+                    b.HasIndex(new[] { "EncargadoId", "Id" }, "EncargadoCargoId_UQ")
                         .IsUnique();
 
                     b.ToTable("Cargos");
@@ -90,7 +98,12 @@ namespace Panaderia.BD.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("int");
 
+                    b.Property<int?>("VentaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VentaId");
 
                     b.HasIndex(new[] { "DNIEmpleado" }, "EmpleadoDNI_UQ")
                         .IsUnique();
@@ -133,6 +146,9 @@ namespace Panaderia.BD.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
+                    b.Property<int?>("ProveedorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PuestoCargoEncargado")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -143,6 +159,8 @@ namespace Panaderia.BD.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProveedorId");
 
                     b.HasIndex(new[] { "DNIEncargado" }, "EncargadoDNI_UQ")
                         .IsUnique();
@@ -248,30 +266,35 @@ namespace Panaderia.BD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CantidadVenta")
+                    b.Property<int>("CantidadProduc")
                         .HasMaxLength(10)
                         .HasColumnType("int");
 
-                    b.Property<int>("CodigoVenta")
+                    b.Property<int>("CodigoProduc")
                         .HasMaxLength(30)
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmpleadoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FechaVenta")
                         .HasMaxLength(10)
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PrecioVenta")
+                    b.Property<string>("NombreProduc")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("PrecioProduc")
                         .HasMaxLength(10)
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmpleadoId");
+                    b.HasIndex("ProductoId");
 
-                    b.HasIndex(new[] { "CodigoVenta" }, "CodigoProducVenta_UQ")
+                    b.HasIndex(new[] { "CodigoProduc" }, "CodigoProducVenta_UQ")
                         .IsUnique();
 
                     b.ToTable("Ventas");
@@ -285,7 +308,29 @@ namespace Panaderia.BD.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Panaderia.BD.Data.Entidades.Encargado", "Encargado")
+                        .WithMany("Cargos")
+                        .HasForeignKey("EncargadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Empleado");
+
+                    b.Navigation("Encargado");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Empleado", b =>
+                {
+                    b.HasOne("Panaderia.BD.Data.Entidades.Venta", null)
+                        .WithMany("Empleados")
+                        .HasForeignKey("VentaId");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Encargado", b =>
+                {
+                    b.HasOne("Panaderia.BD.Data.Entidades.Proveedor", null)
+                        .WithMany("Encargados")
+                        .HasForeignKey("ProveedorId");
                 });
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Producto", b =>
@@ -312,16 +357,21 @@ namespace Panaderia.BD.Migrations
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Venta", b =>
                 {
-                    b.HasOne("Panaderia.BD.Data.Entidades.Empleado", "Empleados")
+                    b.HasOne("Panaderia.BD.Data.Entidades.Empleado", "Producto")
                         .WithMany()
-                        .HasForeignKey("EmpleadoId")
+                        .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Empleados");
+                    b.Navigation("Producto");
                 });
 
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Empleado", b =>
+                {
+                    b.Navigation("Cargos");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Encargado", b =>
                 {
                     b.Navigation("Cargos");
                 });
@@ -331,8 +381,15 @@ namespace Panaderia.BD.Migrations
                     b.Navigation("Proveedores");
                 });
 
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Proveedor", b =>
+                {
+                    b.Navigation("Encargados");
+                });
+
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Venta", b =>
                 {
+                    b.Navigation("Empleados");
+
                     b.Navigation("Productos");
                 });
 #pragma warning restore 612, 618
