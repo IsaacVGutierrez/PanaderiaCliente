@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Panaderia.BD.Data;
 
@@ -11,9 +12,10 @@ using Panaderia.BD.Data;
 namespace Panaderia.BD.Migrations
 {
     [DbContext(typeof(BDContext))]
-    partial class BDContextModelSnapshot : ModelSnapshot
+    [Migration("20220830151236_cuotas")]
+    partial class cuotas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,10 +268,6 @@ namespace Panaderia.BD.Migrations
                     b.Property<DateTime>("FechaVenta")
                         .HasMaxLength(10)
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("InteresVenta")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
 
                     b.Property<int>("PrecioVenta")
                         .HasMaxLength(10)
