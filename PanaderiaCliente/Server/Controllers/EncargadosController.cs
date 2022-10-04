@@ -49,7 +49,7 @@ namespace PanaderiaCliente.Server.Controllers
         }
 
 
-        [HttpPost("{id:int}")]
+        [HttpPost]
 
         public async Task<ActionResult<Encargado>> Post(Encargado encargado )
         {
@@ -62,9 +62,9 @@ namespace PanaderiaCliente.Server.Controllers
                 return encargado;
 
             }
-            catch (Exception p)
+            catch (Exception m)
             {
-                return BadRequest(p.Message);
+                return BadRequest(m.Message);
             }
 
 
