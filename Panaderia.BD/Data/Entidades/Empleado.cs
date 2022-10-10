@@ -1,16 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Panaderia.BD.Data.Entidades
 {
 
-    [Index(nameof(DNIEmpleado), Name = "EmpleadoDNI_UQ", IsUnique = true)]
-
-
-    public class Empleado : EntityBase
+    
+    public class Empleado 
     {
+
         [Required]
-        [MaxLength(15, ErrorMessage = "El Nombre no debe superar los 15 caracteres")]
+        public int Id { get; set; }
+
+
+        [Required]
+        [MaxLength(20, ErrorMessage = "El Nombre no debe superar los 15 caracteres")]
         public string NombreEmpleado { get; set; }
 
         [Required]
@@ -18,17 +20,17 @@ namespace Panaderia.BD.Data.Entidades
         public string ApellidoEmpleado { get; set; }
 
         [Required]
-        [MaxLength(9, ErrorMessage = "El DNI no debe superar los 9 caracteres")]
-        public int DNIEmpleado { get; set; }
+        [MaxLength(12, ErrorMessage = "El DNI no debe superar los 9 caracteres")]
+        public string DNIEmpleado { get; set; }
 
         [Required]
         [MaxLength(2, ErrorMessage = "La Edad no debe superar los 2 caracteres")]
-        public int EdadEmpleado { get; set; }
+        public string EdadEmpleado { get; set; }
 
         
         [Required]
         [MaxLength(12, ErrorMessage = "El Telefono no debe superar los 12 caracteres")]
-        public long TelefonoEmpleado { get; set; }
+        public string TelefonoEmpleado { get; set; }
 
         [Required]
         [MaxLength(30, ErrorMessage = "La Direccion no debe superar los 30 caracteres")]
@@ -36,15 +38,14 @@ namespace Panaderia.BD.Data.Entidades
 
 
         [Required]
-        [MaxLength(10, ErrorMessage = "La Fecha no debe superar los 10 caracteres")]
-        public DateTime FechaContratoEmpleado { get; set; }
+        [MaxLength(30, ErrorMessage = "La Fecha no debe superar los 10 caracteres")]
+        public string FechaContratoEmpleado { get; set; }
 
 
-        //[Required(ErrorMessage = "El Cargo es obligatorio")]
-        public int? CargoId { get; set; }
+        [Required(ErrorMessage = "El Cargo es obligatorio")]
+        public int CargoId { get; set; }
         public Cargo Cargo { get; set; }
 
-
-
+       
     }
 }

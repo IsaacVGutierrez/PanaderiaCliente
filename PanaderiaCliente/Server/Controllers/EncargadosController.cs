@@ -10,9 +10,9 @@ namespace PanaderiaCliente.Server.Controllers
 
     public class EncargadosController : ControllerBase
     {
-        private readonly BDContext context;
+        private readonly Bdcontext context;
 
-        public EncargadosController(BDContext context)
+        public EncargadosController(Bdcontext context)
         {
             this.context = context;
         }
@@ -51,7 +51,7 @@ namespace PanaderiaCliente.Server.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<Encargado>> Post(Encargado encargado )
+        public async Task<ActionResult<int>> Post(Encargado encargado )
         {
             try
             {
@@ -59,7 +59,7 @@ namespace PanaderiaCliente.Server.Controllers
 
                 context.Encargados.Add(encargado);
                 await context.SaveChangesAsync();
-                return encargado;
+                return encargado.Id;
 
             }
             catch (Exception m)
@@ -117,6 +117,7 @@ namespace PanaderiaCliente.Server.Controllers
             }
 
             carg.NombreEncargado = Cargo.NombreEncargado;
+            carg.ApellidoEncargado = Cargo.ApellidoEncargado;
 
 
             try

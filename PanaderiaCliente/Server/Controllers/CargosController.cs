@@ -10,9 +10,9 @@ namespace PanaderiaCliente.Server.Controllers
 
     public class CargosController : ControllerBase
     {
-        private readonly BDContext context;
+        private readonly Bdcontext context;
 
-        public CargosController(BDContext context)
+        public CargosController(Bdcontext context)
         {
             this.context = context;
         }
@@ -51,7 +51,7 @@ namespace PanaderiaCliente.Server.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<Cargo>> Post(Cargo cargo)
+        public async Task<ActionResult<int>> Post(Cargo cargo)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace PanaderiaCliente.Server.Controllers
 
                 context.Cargos.Add(cargo);
                 await context.SaveChangesAsync();
-                return cargo;
+                return cargo.Id;
 
             }
             catch (Exception p)

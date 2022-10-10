@@ -10,9 +10,9 @@ namespace PanaderiaCliente.Server.Controllers
 
     public class ProductosController : ControllerBase
     {
-        private readonly BDContext context;
+        private readonly Bdcontext context;
 
-        public ProductosController(BDContext context)
+        public ProductosController(Bdcontext context)
         {
             this.context = context;
         }
@@ -33,7 +33,7 @@ namespace PanaderiaCliente.Server.Controllers
             var cargo = await context.Productos
 
                 .Where(e => e.Id == id)
-                .Include(m => m.Proveedores)
+                .Include(m => m.Proveedor)
                 .FirstOrDefaultAsync();
 
 
@@ -51,7 +51,7 @@ namespace PanaderiaCliente.Server.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<Producto>> Post(Producto cargo)
+        public async Task<ActionResult<int>> Post(Producto cargo)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace PanaderiaCliente.Server.Controllers
 
                 context.Productos.Add(cargo);
                 await context.SaveChangesAsync();
-                return cargo;
+                return cargo.Id;
 
             }
             catch (Exception p)
@@ -80,7 +80,7 @@ namespace PanaderiaCliente.Server.Controllers
             var cargo = await context.Productos
 
              .Where(x => x.NombreProduc == nombre)
-           .Include(i => i.Proveedores)
+           .Include(i => i.Proveedor)
            .FirstOrDefaultAsync();
 
 
@@ -97,7 +97,6 @@ namespace PanaderiaCliente.Server.Controllers
 
 
 
-
         [HttpPut("{id:int}")]
         public ActionResult Put(int id, [FromBody] Producto Cargo)
         {
@@ -110,6 +109,7 @@ namespace PanaderiaCliente.Server.Controllers
 
             var carg = context.Productos.Where(e => e.Id == id).FirstOrDefault();
             var emplead = context.Proveedores.Where(e => e.Id == id).FirstOrDefault();
+            var vent = context.Ventas.Where(e => e.Id == id).FirstOrDefault();
 
             if (carg == null)
             {

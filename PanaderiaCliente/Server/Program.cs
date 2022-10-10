@@ -14,7 +14,7 @@ builder.Services.AddRazorPages();
 
 
 var conn = builder.Configuration.GetConnectionString("con");
-builder.Services.AddDbContext<BDContext>(opciones => opciones.UseSqlServer(conn));
+builder.Services.AddDbContext<Bdcontext>(opciones => opciones.UseSqlServer(conn));
 
 builder.Services.AddSwaggerGen(c=>
 {

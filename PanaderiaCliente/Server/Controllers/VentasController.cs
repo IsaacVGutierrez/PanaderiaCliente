@@ -10,9 +10,9 @@ namespace PanaderiaCliente.Server.Controllers
 
     public class VentasController : ControllerBase
     {
-        private readonly BDContext context;
+        private readonly Bdcontext context;
 
-        public VentasController(BDContext context)
+        public VentasController(Bdcontext context)
         {
             this.context = context;
         }
@@ -33,7 +33,8 @@ namespace PanaderiaCliente.Server.Controllers
             var cargo = await context.Ventas
 
                 .Where(e => e.Id == id)
-                .Include(m => m.Empleados)
+               .Include(i => i.Producto)
+                .Include(m => m.Empleado)
                 .FirstOrDefaultAsync();
 
 
@@ -51,7 +52,7 @@ namespace PanaderiaCliente.Server.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<Venta>> Post(Venta cargo)
+        public async Task<ActionResult<int>> Post(Venta cargo)
         {
             try
             {
@@ -59,7 +60,7 @@ namespace PanaderiaCliente.Server.Controllers
 
                 context.Ventas.Add(cargo);
                 await context.SaveChangesAsync();
-                return cargo;
+                return cargo.Id;
 
             }
             catch (Exception p)
@@ -75,12 +76,14 @@ namespace PanaderiaCliente.Server.Controllers
 
         [HttpGet("VentasPorNombre/{nombre}")]
 
-        public async Task<ActionResult<Venta>> VentasPorNombre(int nombre)
+        public async Task<ActionResult<Venta>> VentasPorNombre(string nombre)
         {
             var cargo = await context.Ventas
 
              .Where(x => x.CodigoVenta == nombre)
-           .Include(i => i.Empleados)
+           .Include(i => i.Producto)
+             .Include(i => i.Empleado)
+           
            .FirstOrDefaultAsync();
 
 
@@ -110,6 +113,7 @@ namespace PanaderiaCliente.Server.Controllers
 
             var carg = context.Ventas.Where(e => e.Id == id).FirstOrDefault();
             var emplead = context.Empleados.Where(e => e.Id == id).FirstOrDefault();
+            var prod = context.Productos.Where(e => e.Id == id).FirstOrDefault();
 
             if (carg == null)
             {
@@ -117,6 +121,11 @@ namespace PanaderiaCliente.Server.Controllers
             }
 
             carg.CodigoVenta = Cargo.CodigoVenta;
+           carg.CantidadVenta = Cargo.CantidadVenta;
+            carg.InteresVenta = Cargo.InteresVenta;
+           carg.CuotasVenta = Cargo.CuotasVenta;
+            carg.PrecioVenta = Cargo.PrecioVenta;
+            carg.FechaVenta = Cargo.FechaVenta;
 
 
             try

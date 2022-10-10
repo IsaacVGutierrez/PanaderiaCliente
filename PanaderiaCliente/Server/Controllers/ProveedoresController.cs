@@ -10,9 +10,9 @@ namespace PanaderiaCliente.Server.Controllers
 
     public class ProveedoresController : ControllerBase
     {
-        private readonly BDContext context;
+        private readonly Bdcontext context;
 
-        public ProveedoresController(BDContext context)
+        public ProveedoresController(Bdcontext context)
         {
             this.context = context;
         }
@@ -51,7 +51,7 @@ namespace PanaderiaCliente.Server.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<Proveedor>> Post(Proveedor cargo)
+        public async Task<ActionResult<int>> Post(Proveedor cargo)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace PanaderiaCliente.Server.Controllers
 
                 context.Proveedores.Add(cargo);
                 await context.SaveChangesAsync();
-                return cargo;
+                return cargo.Id;
 
             }
             catch (Exception p)
@@ -110,6 +110,7 @@ namespace PanaderiaCliente.Server.Controllers
 
             var carg = context.Proveedores.Where(e => e.Id == id).FirstOrDefault();
             var emplead = context.Encargados.Where(e => e.Id == id).FirstOrDefault();
+            var produc = context.Productos.Where(e => e.Id == id).FirstOrDefault();
 
             if (carg == null)
             {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Panaderia.BD.Data;
 using Panaderia.BD.Data.Entidades;
-using System.Linq;
+
 
 namespace PanaderiaCliente.Server.Controllers
 {
@@ -12,9 +12,9 @@ namespace PanaderiaCliente.Server.Controllers
     public class EmpleadosController : ControllerBase
     {
 
-        private readonly BDContext context;
+        private readonly Bdcontext context;
 
-        public EmpleadosController(BDContext context)
+        public EmpleadosController(Bdcontext context)
         {
             this.context = context;
         }
@@ -32,6 +32,7 @@ namespace PanaderiaCliente.Server.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Empleado>> Get(int id)
         {
+
             var empleado = await context.Empleados
 
                 .Where(e => e.Id == id)
@@ -53,7 +54,7 @@ namespace PanaderiaCliente.Server.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<int>> Post( Empleado empleado)
+        public async Task<ActionResult<int>> Post(Empleado empleado)
         {
           
             try
@@ -112,6 +113,7 @@ namespace PanaderiaCliente.Server.Controllers
 
             var emp = context.Empleados.Where(e => e.Id == id).FirstOrDefault();
             var emplead = context.Cargos.Where(e => e.Id == id).FirstOrDefault();
+            var vent = context.Ventas.Where(e => e.Id == id).FirstOrDefault();
 
             if (emp == null)
             {
@@ -119,7 +121,7 @@ namespace PanaderiaCliente.Server.Controllers
             }
 
             emp.NombreEmpleado = Empleado.NombreEmpleado;
-            emp.Cargo = Empleado.Cargo;
+            emp.ApellidoEmpleado = Empleado.ApellidoEmpleado;
 
 
             try
