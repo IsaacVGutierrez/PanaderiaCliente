@@ -1,0 +1,55 @@
+﻿@page "/Editar/{Id:int}"
+@using Panaderia.BD.Data.Entidades
+@using PanaderiaCliente.Client.Servicios
+@inject IHttpService http
+
+@inject NavigationManager navigationManager
+<h3>EditarProducto</h3>
+
+    <Form_Producto producto="producto" onCancel="Cancelar" onValidSubmit="Grabar" />
+
+@code {
+    private Producto producto = new Producto();
+    [Parameter] public int Id { get; set; }
+
+  
+
+        protected async override Task OnInitializedAsync()
+    {
+        await Mostrar();
+    }
+
+    private async Task Mostrar()
+    {
+        var respuesta = await http.Get<Producto>($"api/Productos/{Id}");
+        if(respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        else
+        {
+            producto = respuesta.Respuesta;
+        }
+    }
+    private async void Grabar()
+
+    {
+
+        var respuesta = await http.Put<Producto>($"api/Productos/{Id}", producto);
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        navigationManager.NavigateTo("/Productos");
+
+
+
+
+
+    }
+
+
+    private void Cancelar()
+    {
+    }
+}

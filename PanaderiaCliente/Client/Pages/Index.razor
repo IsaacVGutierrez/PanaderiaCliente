@@ -1,9 +1,365 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<html lang="en">
+    
+<head>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+
+    <style>
+
+    html{
+
+    box-sizing: border-box;
+
+    }
+
+    body {
+
+    font-family: Helvetica;
+
+
+    margin: 0;
+    }
+       header{display: flex;
+    position: fixed;
+    top: -3px;
+    left: 0px;
+    width: 5000px;
+    background-color: RGB(93,173,226);
+    height: 120px;
+    padding: 0;}
+
+    #banner h1{
+
+    position: fixed;
+    top: 25px;
+    left: 250px;
+    font-size: 50px;
+    font-family: Helvetica;
+    text-shadow: 5px 1.5px 10px  #494949 ;
+
+    }
+    .nav-link{color:black}
+
+
+    .nav-link:hover{color:#868686}
+
+}
+
+
+
+}
+#espacio {
+    position: fixed;
+    left: 1603px;
+    top: 70px;
+    width: 204px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+    header .toggle-btn span {
+
+    position: absolute;
+
+    font-size: 4rem;
+    cursor: pointer;
+
+
+}
+#btn-menu   {
+
+    display: none;
+
+}
+
+
+
+.cont-menu  {
+
+    width: 100%;
+    max-width: 250px;
+    background: rgb(36, 34, 34);
+    height: 100vh;
+    position: relative;
+    transition: all 500ms ease;
+    visibility: hidden;
+    transform: translateX(-100%);
+        background-image: linear-gradient(180deg, #198754 0%, #084298 70%);
+
+
+
+}
+#btn-menu:checked ~ .cont-menu  {
+    visibility: visible;
+    transform: translateX(0%);
+    position: fixed;
+}
+
+
+.cont-menu nav  {
+
+
+    transform: translateY(15%);
+
+
+
+}
+
+.cont-menu a    {
+
+    padding: 20px;
+
+
+}
+
+.cont-menu nav a {
+
+    display: block;
+    text-decoration: none;
+    padding: 30px;
+    border-left: 5px solid transparent;
+    transition: all 40ms ease;
+    color: white;
+    transition: all 2000ms transparent;
+}
+
+.cont-menu nav a:hover  {
+
+    border-left: 5px solid #c7c7c7;
+    background: #292929;
+}
+
+
+.cont-menu label    {
+
+
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    color:#c7c7c7;
+    font-size: 35px;
+    cursor: pointer;
+
+
+
+}
+#textos h1{
+       position: absolute;
+    font-size: 36px;
+    top: 113%;
+    left: 17%;
+    font-family: Helvetica;
+
+}
+#banner nav{
+       display: flex;
+    position: fixed;
+    left: 891px;
+    top: 59px;
+    text-decoration: none;
+}
+
+
+}
+
+   .registro {
+    position: absolute ;
+    left: 100px;
+    top : 170px;
+    font-size: 17px;   
+
+                 }
+
+     .registro a {
+
+    color: white;
+    text-decoration: none;
+    background-color: rgb(84, 84, 245);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    border-color: rgb(131, 129, 129);
+    border: 2px solid rgb(131, 129, 129);
+    cursor: pointer;
+    padding: 20px;
+
+        }
+
+   
+
+
+        .boton-sesion label   {
+    color: white;
+    background-color: rgb(84, 84, 245);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 18px;
+    left: 1430px;
+    border-color: rgb(131, 129, 129);
+    border: 2px solid rgb(131, 129, 129);
+    cursor: pointer;
+}
+
+
+ .boton-sesion input   {
+
+    position: absolute;
+    top: 50px;
+    left: 1100px;
+    opacity: 0;
+
+}
+
+ .boton-sesion label:hover{
+
+            color:coral;
+
+        }
+
+
+
+    a, .btn-link {
+        color: white;
+    }
+
+    a {
+        text-decoration: none;
+    }
+        
+        .boton-registro label{
+        color: white;
+        color: white;
+        background-color: rgb(84, 84, 245);
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 10px;
+        position: absolute;
+        top: 68px;
+        left: 1430px;
+        border-color: rgb(131, 129, 129);
+        border: 2px solid rgb(131, 129, 129);
+        cursor: pointer;
+        width: 128px;
+
+    }
+         .boton-registro a:hover{
+
+            color:coral;
+
+        }
+
+       
+
+
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+
+
+
+    <header>
+
+     <label for="btn-menu" class=icon-menu>
+        <div class="toggle-btn">
+
+            <span>&#9776</span>
+
+        </div>
+        </label>
+
+       
+
+        <input type="checkbox" id="btn-menu">
+        <div class="cont-menu">
+            <nav>
+             <a href="/">Pagina principal</a>
+                <a href="/Registrar_Producto">Registrar productos</a>
+             <a href="/Productos">Mis productos</a>
+             
+
+            </nav>
+            <label for="btn-menu" class=icon-menu>
+                <div class="salir"> 
+                <span>&#x21d0;</span>
+                </div>
+                </label>
+                </div>
+          <section id = "banner">
+            <div class="palabra" >
+                <h1>¡Panaderia Cliente!</h1>
+            </div>
+            <nav>
+             
+            </nav>
+                    
+           
+   
+            </section>
+            <section id="textos">
+
+
+
+
+
+            </section>
+          
+
+
+
+            <div class="boton-sesion">
+
+                <label for="submit">
+                    Iniciar Sesion
+
+
+
+
+
+
+
+                </label>
+            </div>
+
+        <div class="boton-registro ">
+
+            <label for="submit">
+                <a href="Registrar_Empleado">Registrar</a>
+            </label>
+        </div>
+        
+
+</header>
+
+</body>
+
+
+
+
+    </html> 

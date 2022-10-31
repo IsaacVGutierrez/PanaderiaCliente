@@ -1,0 +1,178 @@
+﻿@using Panaderia.BD.Data.Entidades
+@inject NavigationManager navigatioManager
+@using PanaderiaCliente.Client.Servicios
+
+<style>
+
+    .txt1{
+    
+    position: absolute;
+    top: 380px;
+    left: 404px;
+    }
+
+    .nombre{
+    
+    position: absolute;
+    top: 355px;
+    left: 408px;
+    }
+    .txt2{
+    
+    position: absolute;
+    top: 527px;
+    left: 404px;
+    }
+
+    .precio{
+    
+    position: absolute;
+    top: 503px;
+    left: 408px;
+    }
+
+    .codigo{
+    
+    position: absolute;
+    top: 621px;
+    left: 406px;
+
+    }
+
+    .txt3{
+    
+    position: absolute;
+    top: 646px;
+    left: 404px;
+
+    }
+
+    .txt4{
+    position: absolute;
+    top: 646.8%;
+    left: 1113px;
+    }
+
+    .proveedor{
+    position: absolute;
+    top: 589.8%;
+    left: 1200px;
+    }
+
+      .txt5{
+    position: absolute;
+    top: 446.8%;
+    left: 1113px;
+    }
+
+    .cantidad{
+    position: absolute;
+    top: 489.8%;
+    left: 1200px;
+    }
+
+
+      .txt6{
+    position: absolute;
+    top: 346.8%;
+    left: 1113px;
+    }
+
+    .vencimiento{
+    position: absolute;
+    top: 389.8%;
+    left: 1200px;
+    }
+
+
+
+    .aceptar{
+    position: absolute;
+    top: 643px;
+    left: 1126px;
+    }
+
+</style>
+
+
+
+<EditForm Model="producto" OnValidSubmit="onValidSubmit">
+    <DataAnnotationsValidator />
+
+
+
+        <label class="nombre">Nombre</label>
+        <div class="txt1">
+
+            <InputText class="form-control" @bind-Value="@producto.NombreProduc" />
+            <ValidationMessage For="@(()=> producto.NombreProduc)" />
+        </div>
+
+        <label class="precio">Precio </label>
+        <div class="txt2">
+
+            <InputText class="form-control" @bind-Value="@producto.PrecioProduc" />
+            <ValidationMessage For="@(()=> producto.PrecioProduc)" />
+        </div>
+
+        <label class="codigo">Codigo</label>
+        <div class="txt3">
+
+            <InputText class="form-control" @bind-Value="@producto.CodigoProduc" />
+            <ValidationMessage For="@(()=> producto.CodigoProduc)" />
+        </div>
+
+      @*<label>Foto</label>
+        <div>
+
+           <InputText class="form-control" @bind-Value="@foto.Fotos" />
+            <ValidationMessage For="@(()=> foto.Fotos)" />
+        </div>*@
+
+       <label class="proveedor">Proveedor</label>
+        <div class="txt4">
+
+            <InputNumber class= "form-select" @bind-Value ="@producto.ProveedorId" /> 
+               <ValidationMessage For="@(()=> producto.ProveedorId)" />
+               
+                              
+        </div>
+
+
+           <label class="cantidad">Cantidad</label>
+        <div class="txt5">
+
+            <InputText class= "form-select" @bind-Value ="@producto.CantidadProduc" /> 
+               <ValidationMessage For="@(()=> producto.CantidadProduc)" />
+               
+                              
+        </div>
+
+   
+           <label class="vencimiento">Vencimiento</label>
+        <div class="txt6">
+
+            <InputText class= "form-select" @bind-Value ="@producto.FechaVencimientoProduc" /> 
+               <ValidationMessage For="@(()=> producto.FechaVencimientoProduc)" />
+               
+                              
+        </div>
+
+    <div class="aceptar">
+   <button type="submit" class="btn btn-primary" >Aceptar</button>
+   </div>
+   <div class="cancelar">
+   <button  class="btn btn-secondary" @onclick="onCancel">Cancelar</button>
+   </div>
+
+</EditForm>
+
+@code {
+
+    [Parameter] public Producto producto { get; set; }
+    //[Parameter] public Proveedor proveedor { get; set; }
+   // [Parameter] public Encargado encargado { get; set; }
+    [Parameter] public EventCallback onValidSubmit { get; set; 
+}
+    [Parameter] public EventCallback onCancel { get; set; }
+}

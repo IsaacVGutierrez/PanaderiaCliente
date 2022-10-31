@@ -21,7 +21,9 @@ namespace PanaderiaCliente.Server.Controllers
         public async Task<ActionResult<List<Producto>>> Get()
         {
 
-            return await context.Productos.ToListAsync();
+            return await context.Productos. 
+                                          Include(m => m.Proveedor)                                         
+                                          .ToListAsync();
 
 
         }
@@ -30,36 +32,36 @@ namespace PanaderiaCliente.Server.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Producto>> Get(int id)
         {
-            var cargo = await context.Productos
+            var producto = await context.Productos
 
                 .Where(e => e.Id == id)
                 .Include(m => m.Proveedor)
                 .FirstOrDefaultAsync();
 
 
-            if (cargo == null)
+            if (producto == null)
 
             {
                 return NotFound($"No existe el Producto de Id= {id}");
 
             }
 
-            return cargo;
+            return producto;
 
         }
 
 
         [HttpPost]
 
-        public async Task<ActionResult<int>> Post(Producto cargo)
+        public async Task<ActionResult<int>> Post(Producto producto)
         {
             try
             {
 
 
-                context.Productos.Add(cargo);
+                context.Productos.Add(producto);
                 await context.SaveChangesAsync();
-                return cargo.Id;
+                return producto.Id;
 
             }
             catch (Exception p)
@@ -77,32 +79,32 @@ namespace PanaderiaCliente.Server.Controllers
 
         public async Task<ActionResult<Producto>> ProductoPorNombre(string nombre)
         {
-            var cargo = await context.Productos
+            var producto = await context.Productos
 
              .Where(x => x.NombreProduc == nombre)
            .Include(i => i.Proveedor)
            .FirstOrDefaultAsync();
 
 
-            if (cargo == null)
+            if (producto == null)
 
             {
                 return NotFound($"No existe el nombre = {nombre}");
 
             }
 
-            return cargo;
+            return producto;
 
         }
 
 
 
         [HttpPut("{id:int}")]
-        public ActionResult Put(int id, [FromBody] Producto Cargo)
+        public ActionResult Put(int id, [FromBody] Producto producto)
         {
 
 
-            if (id != Cargo.Id)
+            if (id != producto.Id)
             {
                 return BadRequest("No existe el Producto");
             }
@@ -116,8 +118,16 @@ namespace PanaderiaCliente.Server.Controllers
                 return NotFound("No existe el Producto");
             }
 
-            carg.NombreProduc = Cargo.NombreProduc;
+            carg.NombreProduc = producto.NombreProduc;
+            carg.PrecioProduc = producto.PrecioProduc;
+            carg.CodigoProduc = producto.CodigoProduc;
+            carg.FechaVencimientoProduc = producto.FechaVencimientoProduc;
+            carg.CantidadProduc = producto.CantidadProduc;
 
+            emplead.NombreProved = producto.Proveedor.NombreProved;
+
+           
+         
 
             try
             {
