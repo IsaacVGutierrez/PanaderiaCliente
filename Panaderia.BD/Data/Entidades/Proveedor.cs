@@ -5,11 +5,11 @@ namespace Panaderia.BD.Data.Entidades
 
 
 {
-   
+   // [Index(nameof(DNIProved), Name = "ProveedorDNI_UQ", IsUnique = true)]
     public class Proveedor 
     {
 
-        [Required]
+       
         public int Id { get; set; }
 
 
@@ -34,7 +34,7 @@ namespace Panaderia.BD.Data.Entidades
          public string FechaEntregaProved { get; set; }
 
 
-        [Required(ErrorMessage = "El Encargado es obligatorio")]
+       
         public int EncargadoId { get; set; }
 
         public Encargado Encargado { get; set; }

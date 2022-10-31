@@ -21,7 +21,11 @@ namespace PanaderiaCliente.Server.Controllers
         public async Task<ActionResult<List<Venta>>> Get()
         {
 
-            return await context.Ventas.ToListAsync();
+            return await context.Ventas
+
+                    .Include(i => i.Producto)
+                .Include(m => m.Empleado)
+                .ToListAsync();
 
 
         }
@@ -52,15 +56,15 @@ namespace PanaderiaCliente.Server.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult<int>> Post(Venta cargo)
+        public async Task<ActionResult<int>> Post(Venta venta)
         {
             try
             {
 
 
-                context.Ventas.Add(cargo);
+                context.Ventas.Add(venta);
                 await context.SaveChangesAsync();
-                return cargo.Id;
+                return venta.Id;
 
             }
             catch (Exception p)
@@ -102,11 +106,11 @@ namespace PanaderiaCliente.Server.Controllers
 
 
         [HttpPut("{id:int}")]
-        public ActionResult Put(int id, [FromBody] Venta Cargo)
+        public ActionResult Put(int id, [FromBody] Venta venta)
         {
 
 
-            if (id != Cargo.Id)
+            if (id != venta.Id)
             {
                 return BadRequest("No existe el Codigo");
             }
@@ -120,13 +124,16 @@ namespace PanaderiaCliente.Server.Controllers
                 return NotFound("No existe la Venta");
             }
 
-            carg.CodigoVenta = Cargo.CodigoVenta;
-           carg.CantidadVenta = Cargo.CantidadVenta;
-            carg.InteresVenta = Cargo.InteresVenta;
-           carg.CuotasVenta = Cargo.CuotasVenta;
-            carg.PrecioVenta = Cargo.PrecioVenta;
-            carg.FechaVenta = Cargo.FechaVenta;
+            carg.CodigoVenta = venta.CodigoVenta;
+           carg.CantidadVenta = venta.CantidadVenta;
+            carg.InteresVenta = venta.InteresVenta;
+           carg.CuotasVenta = venta.CuotasVenta;
+            carg.PrecioVenta = venta.PrecioVenta;
+            carg.FechaVenta = venta.FechaVenta;
 
+
+            emplead.NombreEmpleado = venta.Empleado.NombreEmpleado;
+            prod.NombreProduc = venta.Producto.NombreProduc;
 
             try
             {

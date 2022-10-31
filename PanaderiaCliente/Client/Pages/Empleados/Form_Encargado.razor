@@ -1,0 +1,111 @@
+﻿@using Panaderia.BD.Data.Entidades
+@inject NavigationManager navigatioManager
+@using PanaderiaCliente.Client.Servicios
+
+
+<EditForm Model="encargado" OnValidSubmit="onValidSubmit">
+    <DataAnnotationsValidator />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+        <label >Nombre</label>
+        <div class="txt1">
+
+            <InputText class="form-control" @bind-Value="@encargado.NombreEncargado" />
+            <ValidationMessage For="@(()=> encargado.NombreEncargado)" />
+        </div>
+
+        <label>Apellido </label>
+        <div class="txt2">
+
+            <InputText class="form-control" @bind-Value="@encargado.ApellidoEncargado" />
+            <ValidationMessage For="@(()=> encargado.ApellidoEncargado)" />
+        </div>
+
+        <label >DNI</label>
+        <div class="txt3">
+
+            <InputText class="form-control" @bind-Value="@encargado.DNIEncargado" />
+            <ValidationMessage For="@(()=> encargado.DNIEncargado)" />
+        </div>
+
+
+       <label >Edad</label>
+        <div class="txt4">
+
+            <InputText class= "form-control" @bind-Value ="@encargado.EdadEncargado" /> 
+               <ValidationMessage For="@(()=> encargado.EdadEncargado)" />
+               
+                              
+        </div>
+
+
+           <label>Puesto</label>
+        <div class="txt5">
+
+            <InputText class= "form-control" @bind-Value ="@encargado.PuestoCargoEncargado" /> 
+               <ValidationMessage For="@(()=> encargado.PuestoCargoEncargado)" />
+               
+                              
+        </div>
+
+   
+           <label>Telefono</label>
+        <div class="txt6">
+
+            <InputText class= "form-control" @bind-Value ="@encargado.TelefonoEncargado" /> 
+               <ValidationMessage For="@(()=> encargado.TelefonoEncargado)" />
+               
+                              
+        </div>
+
+
+               <label>Direccion </label>
+        <div class="txt7">
+
+            <InputText class= "form-control" @bind-Value ="@encargado.DireccionEncargado" /> 
+               <ValidationMessage For="@(()=> encargado.DireccionEncargado)" />
+               
+                              
+        </div>
+
+
+               <label >Fecha Inicio Contrato</label>
+        <div class="txt8">
+
+            <InputText class= "form-control" @bind-Value ="@encargado.FechaInicioEncargado" /> 
+               <ValidationMessage For="@(()=> encargado.FechaInicioEncargado)" />
+               
+                              
+        </div>
+
+
+        <br />
+        <br />
+
+
+
+    <div class="aceptar">
+   <button type="submit" class="btn btn-primary" >Aceptar</button>
+   </div>
+      <br />
+        <br />
+   <div class="cancelar">
+   <button  class="btn btn-secondary" @onclick="onCancel">Cancelar</button>
+   </div>
+
+</EditForm>
+
+@code {
+
+    //[Parameter] public Empleado empleado { get; set; }
+   // [Parameter] public Cargo cargo { get; set; }
+    [Parameter] public Encargado encargado { get; set; }
+    [Parameter] public EventCallback onValidSubmit { get; set; 
+}
+    [Parameter] public EventCallback onCancel { get; set; }
+}

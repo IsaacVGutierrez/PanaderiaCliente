@@ -23,7 +23,9 @@ namespace PanaderiaCliente.Server.Controllers
         public async Task<ActionResult<List<Empleado>>> Get()
         {
 
-            return await context.Empleados.ToListAsync();
+            return await context.Empleados.
+                                           Include(m => m.Cargo)
+                                          .ToListAsync();
 
 
         }
@@ -122,7 +124,13 @@ namespace PanaderiaCliente.Server.Controllers
 
             emp.NombreEmpleado = Empleado.NombreEmpleado;
             emp.ApellidoEmpleado = Empleado.ApellidoEmpleado;
+            emp.DNIEmpleado = Empleado.DNIEmpleado;
+            emp.EdadEmpleado = Empleado.EdadEmpleado;
+            emp.TelefonoEmpleado = Empleado.TelefonoEmpleado;
+            emp.DireccionEmpleado = Empleado.DireccionEmpleado;
+            emp.FechaContratoEmpleado = Empleado.FechaContratoEmpleado;
 
+            emplead.NombreCargo = Empleado.Cargo.NombreCargo;
 
             try
             {

@@ -1,0 +1,120 @@
+﻿@using Panaderia.BD.Data.Entidades
+@inject NavigationManager navigatioManager
+@using PanaderiaCliente.Client.Servicios
+
+
+
+
+<EditForm Model="empleado" OnValidSubmit="onValidSubmit">
+    <DataAnnotationsValidator />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+        <label >Nombre</label>
+        <div class="txt1">
+
+            <InputText class="form-control" @bind-Value="@empleado.NombreEmpleado" />
+            <ValidationMessage For="@(()=> empleado.NombreEmpleado)" />
+        </div>
+
+        <label>Apellido </label>
+        <div class="txt2">
+
+            <InputText class="form-control" @bind-Value="@empleado.ApellidoEmpleado" />
+            <ValidationMessage For="@(()=> empleado.ApellidoEmpleado)" />
+        </div>
+
+        <label >DNI</label>
+        <div class="txt3">
+
+            <InputText class="form-control" @bind-Value="@empleado.DNIEmpleado" />
+            <ValidationMessage For="@(()=> empleado.DNIEmpleado)" />
+        </div>
+
+      @*<label>Foto</label>
+        <div>
+
+           <InputText class="form-control" @bind-Value="@foto.Fotos" />
+            <ValidationMessage For="@(()=> foto.Fotos)" />
+        </div>*@
+
+       <label >Edad</label>
+        <div class="txt4">
+
+            <InputText class= "form-control" @bind-Value ="@empleado.EdadEmpleado" /> 
+               <ValidationMessage For="@(()=> empleado.EdadEmpleado)" />
+               
+                              
+        </div>
+
+
+           <label>Telefono</label>
+        <div class="txt5">
+
+            <InputText class= "form-control" @bind-Value ="@empleado.TelefonoEmpleado" /> 
+               <ValidationMessage For="@(()=> empleado.TelefonoEmpleado)" />
+               
+                              
+        </div>
+
+   
+           <label>Direccion</label>
+        <div class="txt6">
+
+            <InputText class= "form-control" @bind-Value ="@empleado.DireccionEmpleado" /> 
+               <ValidationMessage For="@(()=> empleado.DireccionEmpleado)" />
+               
+                              
+        </div>
+
+
+               <label>Fecha Inicio Contrato</label>
+        <div class="txt7">
+
+            <InputText class= "form-control" @bind-Value ="@empleado.FechaContratoEmpleado" /> 
+               <ValidationMessage For="@(()=> empleado.FechaContratoEmpleado)" />
+               
+                              
+        </div>
+
+
+               <label >Cargo</label>
+        <div class="txt8">
+
+            <InputNumber class= "form-select" @bind-Value ="@empleado.CargoId" /> 
+               <ValidationMessage For="@(()=> empleado.CargoId)" />
+               
+                              
+        </div>
+
+
+        <br />
+        <br />
+
+
+
+    <div class="aceptar">
+   <button type="submit" class="btn btn-primary" >Aceptar</button>
+   </div>
+      <br />
+        <br />
+   <div class="cancelar">
+   <button  class="btn btn-secondary" @onclick="onCancel">Cancelar</button>
+   </div>
+
+</EditForm>
+
+
+@code {
+
+    [Parameter] public Empleado empleado { get; set; }
+   // [Parameter] public Cargo cargo { get; set; }
+   // [Parameter] public Encargado encargado { get; set; }
+    [Parameter] public EventCallback onValidSubmit { get; set; 
+}
+    [Parameter] public EventCallback onCancel { get; set; }
+}

@@ -1,0 +1,54 @@
+﻿@using Panaderia.BD.Data.Entidades
+@inject NavigationManager navigatioManager
+@using PanaderiaCliente.Client.Servicios
+
+
+
+
+<EditForm Model="cargo" OnValidSubmit="onValidSubmit">
+    <DataAnnotationsValidator />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+
+        <label>Nombre Cargo </label>
+        <div class="txt2">
+
+            <InputText class="form-control" @bind-Value="@cargo.NombreCargo" />
+            <ValidationMessage For="@(()=> cargo.NombreCargo)" />
+        </div>
+
+                                
+       
+
+        <br />
+        <br />
+
+
+
+    <div class="aceptar">
+   <button type="submit" class="btn btn-primary" >Aceptar</button>
+   </div>
+      <br />
+        <br />
+   <div class="cancelar">
+   <button  class="btn btn-secondary" @onclick="onCancel">Cancelar</button>
+   </div>
+
+</EditForm>
+
+
+@code {
+
+   
+    [Parameter] public Cargo cargo { get; set; }
+   // [Parameter] public Encargado encargado { get; set; }
+    [Parameter] public EventCallback onValidSubmit { get; set; 
+}
+    [Parameter] public EventCallback onCancel { get; set; }
+}

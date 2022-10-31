@@ -2,104 +2,17 @@
 @inject NavigationManager navigatioManager
 @using PanaderiaCliente.Client.Servicios
 
-<style>
-
-    .txt1{
-    
-    position: absolute;
-    top: 380px;
-    left: 404px;
-    }
-
-    .nombre{
-    
-    position: absolute;
-    top: 355px;
-    left: 408px;
-    }
-    .txt2{
-    
-    position: absolute;
-    top: 527px;
-    left: 404px;
-    }
-
-    .precio{
-    
-    position: absolute;
-    top: 503px;
-    left: 408px;
-    }
-
-    .codigo{
-    
-    position: absolute;
-    top: 621px;
-    left: 406px;
-
-    }
-
-    .txt3{
-    
-    position: absolute;
-    top: 646px;
-    left: 404px;
-
-    }
-
-    .txt4{
-    position: absolute;
-    top: 646.8%;
-    left: 1113px;
-    }
-
-    .proveedor{
-    position: absolute;
-    top: 589.8%;
-    left: 1200px;
-    }
-
-      .txt5{
-    position: absolute;
-    top: 446.8%;
-    left: 1113px;
-    }
-
-    .cantidad{
-    position: absolute;
-    top: 489.8%;
-    left: 1200px;
-    }
-
-
-      .txt6{
-    position: absolute;
-    top: 346.8%;
-    left: 1113px;
-    }
-
-    .vencimiento{
-    position: absolute;
-    top: 389.8%;
-    left: 1200px;
-    }
-
-
-
-    .aceptar{
-    position: absolute;
-    top: 643px;
-    left: 1126px;
-    }
-
-</style>
-
 
 
 <EditForm Model="producto" OnValidSubmit="onValidSubmit">
     <DataAnnotationsValidator />
 
-
+        <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
         <label class="nombre">Nombre</label>
         <div class="txt1">
@@ -158,9 +71,16 @@
                               
         </div>
 
+
+           <br />
+        <br />
+
+
     <div class="aceptar">
    <button type="submit" class="btn btn-primary" >Aceptar</button>
    </div>
+      <br />
+        <br />
    <div class="cancelar">
    <button  class="btn btn-secondary" @onclick="onCancel">Cancelar</button>
    </div>

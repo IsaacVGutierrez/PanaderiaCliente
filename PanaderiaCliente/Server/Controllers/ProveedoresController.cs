@@ -120,6 +120,14 @@ namespace PanaderiaCliente.Server.Controllers
             }
 
             carg.NombreProved = proveedor.NombreProved;
+            carg.DNIProved = proveedor.DNIProved;
+            carg.DireccionProved = proveedor.DireccionProved;
+            carg.TelefonoProved = proveedor.TelefonoProved;
+            carg.FechaEntregaProved = proveedor.FechaEntregaProved;
+
+            emplead.NombreEncargado = proveedor.Encargado.NombreEncargado;
+
+          
 
 
             try

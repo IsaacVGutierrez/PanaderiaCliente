@@ -7,7 +7,7 @@ namespace Panaderia.BD.Data.Entidades
     
     public class Cargo
     {
-        [Required]
+     
         public int Id { get; set; }
 
 

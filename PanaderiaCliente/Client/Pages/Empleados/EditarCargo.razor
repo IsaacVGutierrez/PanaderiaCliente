@@ -1,0 +1,55 @@
+﻿@page "/EditarCargo/{Id:int}"
+@using Panaderia.BD.Data.Entidades
+@using PanaderiaCliente.Client.Servicios
+@inject IHttpService http
+
+@inject NavigationManager navigationManager
+<h3>Editar Cargo</h3>
+
+    <Form_Cargo cargo="cargo" onCancel="Cancelar" onValidSubmit="Grabar" />
+
+@code {
+    private Cargo cargo = new Cargo();
+    [Parameter] public int Id { get; set; }
+
+  
+
+        protected async override Task OnInitializedAsync()
+    {
+        await Mostrar();
+    }
+
+    private async Task Mostrar()
+    {
+        var respuesta = await http.Get<Cargo>($"api/Cargos/{Id}");
+        if(respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        else
+        {
+            cargo = respuesta.Respuesta;
+        }
+    }
+    private async void Grabar()
+
+    {
+
+        var respuesta = await http.Put<Cargo>($"api/Cargos/{Id}", cargo);
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        navigationManager.NavigateTo("/Empleados");
+
+
+
+
+
+    }
+
+
+    private void Cancelar()
+    {
+    }
+}

@@ -3,10 +3,10 @@
 
 namespace Panaderia.BD.Data.Entidades
 {
-
-     public class Producto
+    //[Index(nameof(CodigoProduc), Name = "ProductoCodigo_UQ", IsUnique = true)]
+    public class Producto
     {
-        [Required]
+       
         public int Id { get; set; }
 
 
@@ -32,7 +32,7 @@ namespace Panaderia.BD.Data.Entidades
 
 
 
-        [Required(ErrorMessage = "El Proveedor es obligatorio")]
+        
         public int ProveedorId { get; set; }
 
         public Proveedor Proveedor { get; set; }

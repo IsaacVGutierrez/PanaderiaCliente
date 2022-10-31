@@ -3,13 +3,13 @@
 
 namespace Panaderia.BD.Data.Entidades
 {
-   
+   // [Index(nameof(DNIEncargado), Name = "EncargadoDNI_UQ", IsUnique = true)]
     public class Encargado 
     {
 
         
 
-        [Required]
+       
         public int Id { get; set; }
 
 

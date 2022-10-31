@@ -1,9 +1,12 @@
-﻿@page "/sdfds"
-@using Panaderia.BD.Data.Entidades
+﻿@using Panaderia.BD.Data.Entidades
 @using PanaderiaCliente.Client.Servicios
 @inject IHttpService http
-@inject NavigationManager navigationManager
-<h3>Registrar_Producto</h3>
+@page "/Ventas"
+
+
+
+
+<h3>Lista Ventas</h3>
 
 <html>
 
@@ -52,7 +55,7 @@
         top: -3px;
         left: 0px;
         width: 5000px;
-        background-color: RGB(254, 189, 89);
+        background-color: RGB(93,173,226);
         height: 120px;
         padding: 0;
     }
@@ -264,7 +267,7 @@
 <head>
 
 
-    <title>alquiler</title>
+    <title>Panaderia</title>
 
 </head>
 
@@ -284,9 +287,10 @@
         <input type="checkbox" id="btn-menu">
         <div class="cont-menu">
             <nav>
-                <a href="/">Pagina principal</a>
-                <a href="/Registrar_Productos">Registrar productos</a>
+                   <a href="/">Pagina principal</a>
                 <a href="/Productos">Mis productos</a>
+                   <a href="/Empleados"> Empleados</a>
+              <a href="/Ventas"> Ventas</a>
             </nav>
 
             <label for="btn-menu" class=icon-menu>
@@ -314,77 +318,173 @@
         <section id="textos">
 
             <div>
-                <h1>Registrar producto</h1>
+                <h1>Lista Venta</h1>
             </div>
 
-            <div class="labels">
-
-                <p>Nombre del producto</p>
-                <p>Precio del producto</p>
-                <p>Codigo del producto</p>
-                <p class="imagen">Imagen del producto</p>
-
-            </div>
-
-            <div class="cajas-texto">
-
-                <input class="buscador1" type="text" @bind-value="@producto.NombreProduc">
-                <input class="buscador2" type="text"@bind-value="@producto.PrecioProduc">
-                <input class="buscador3" type="text" @bind-value="@producto.CodigoProduc"/> 
-                <input class="Buscador4" type="text" @bind-value="@producto.ProveedorId" />
-              
-
-
-            </div>
-            <div class="boton-imagen">
-                <input type="file" id="file"
-                <label for="file">
-                    Adjuntar
-
-                </label>
-            </div>
-
-            <div class="boton-producto">
-
-                <label for="submit">
-                    Alquilar Producto
-                </label>
-                @*<input type="submit" @onclick="Grabar" value="Save"  />*@
-                <button class="btn btn-primary" @onclick="Grabar">Alquilar producto</button>
-              
-
-            </div>
-
+       
         </section>
 
     </header>
 
-
- 
-
-</body>
+          </body>
 
 
 </html>
+ 
 
 
+
+
+
+
+
+
+   <br />
+        <br />
+        <br />
+        <br />
+
+<a class="btn btn-primary" href="/Registrar_Venta">registrar nueva venta</a>
+
+   <br />
+        <br />
+
+<table>
+    <tr>
+        <th>CodigoVenta</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th>  CantidadVenta</th>
+        <td></td>
+         <td></td>
+          <td></td>
+        <td></td>
+        <th>  FechaVenta</th>
+        <td></td>
+        <td></td>
+        <td></td>
+         <th>  CuotasVenta</th>
+        <td></td>
+        <td></td>
+         <th>  InteresVenta</th>
+        <td></td>
+        <td></td>
+        <th>  PrecioVenta</th>
+         <td></td>
+        <td></td>
+        <td></td>
+          <th>  Empleado</th>
+         <td></td>
+        <td></td>
+          <th>  Producto</th>
+         <td></td>
+        <td></td>
+         <th></th>
+         
+    </tr>
+    @if (ventas==null )
+    {
+        <tr>Cargando......</tr>
+    }
+    else if (ventas.Count ==0 )
+    {
+        <tr>No existen datos</tr>
+    }
+    else
+    {
+         @foreach (var item in ventas )
+        {
+            <tr>
+
+                <td>@item.CodigoVenta</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>@item.CantidadVenta</td>
+                <td></td>
+                <td></td>
+                <td>@item.FechaVenta</td>
+                <td></td>
+                <td></td>
+                  <td></td>
+                    <td>@item.CuotasVenta</td>
+                    <td></td>
+                  <td></td>
+                   <td>@item.InteresVenta</td>
+                <td></td>
+                <td></td>@item.PrecioVenta
+                <td></td>
+                <td></td>
+             <td></td>@item.Empleado.NombreEmpleado
+        <td></td>
+         <td></td>@item.Producto.NombreProduc
+         <th></th>
+           <td></td>
+                <td></td>
+                <td>
+                    <a class="btn btn-primary"
+                       href="EditarVenta/@item.Id">
+                        Editar
+                    </a>
+                </td>
+
+
+                  @* <td>
+                    <a class="btn btn-warning"
+                       @onclick="()=>Eliminar(item)">
+                        Borrar
+                    </a>
+                </td>
+                *@
+
+            </tr>
+        }   
+
+
+    }
+  </table>
+    
+   <br />
+        <br />
+
+
+      
 
 @code {
-    private Producto producto = new Producto();
-      
-    private async void Grabar()
+    List<Producto> productos;
+    List<Venta> ventas;
+    //List<Encargado> Encargados;
+     //List<Proveedor> proveedores;
+      List<Empleado> Empleados;
+
+
+
+    protected override async Task OnInitializedAsync()
     {
-        var httpRespuesta = await http.Post<Producto>("api/Productos", producto);
-        if (httpRespuesta.Error)
-        {
-            var body = httpRespuesta.HttpResponseMessage;
-        }
-        navigationManager.NavigateTo("/Productos");
+        base.OnInitializedAsync();
+        await Leer();
+       
     }
-    
+
+    private async Task Leer()
+
+    {
+
+        var respuesta = await http.Get<List<Venta>>("api/Ventas");
+        
+        if (!respuesta.Error)
+        {
+            ventas = respuesta.Respuesta;
+        }
+
+    }
+
+   
 
 
-    private void Cancelar()
-    { }
+
 
 }

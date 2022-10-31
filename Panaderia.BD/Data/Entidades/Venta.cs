@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Panaderia.BD.Data.Entidades
 {
- 
+   // [Index(nameof(CodigoVenta), Name = "CodigoProducVenta_UQ", IsUnique = true)]
     public class Venta
     {
-        [Required]
+       
         public int Id { get; set; }
 
 
@@ -37,12 +37,12 @@ namespace Panaderia.BD.Data.Entidades
 
     
 
-        [Required(ErrorMessage = "El Empleado es obligatorio")]
+       
         public int EmpleadoId { get; set; }
         public Empleado Empleado { get; set; }
 
 
-        [Required(ErrorMessage = "El Empleado es obligatorio")]
+      
         public int ProductoId { get; set; }
         public Producto Producto { get; set; }
 

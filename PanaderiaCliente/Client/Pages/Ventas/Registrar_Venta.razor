@@ -1,4 +1,4 @@
-﻿@page "/Registrar_Producto"
+﻿@page "/Registrar_Venta"
 @using Panaderia.BD.Data.Entidades 
 @using PanaderiaCliente.Client.Servicios
 @inject IHttpService http
@@ -173,7 +173,7 @@
 <head>
 
 
-    <title>alquiler</title>
+    <title>Panaderia Cliente</title>
 
 </head>
 
@@ -193,9 +193,10 @@
         <input type="checkbox" id="btn-menu">
         <div class="cont-menu">
             <nav>
-                <a href="/">Pagina principal</a>
-                <a href="/Registrar_Productos">Registrar productos</a>
+                   <a href="/">Pagina principal</a>
                 <a href="/Productos">Mis productos</a>
+                   <a href="/Empleados"> Empleados</a>
+              <a href="/Ventas"> Ventas</a>
             </nav>
 
             <label for="btn-menu" class=icon-menu>
@@ -226,25 +227,26 @@
 
 </html>
 
-<Form_Producto producto="producto" onCancel="Cancelar" onValidSubmit="Grabar" />
+<Form_Venta venta="venta" onCancel="Cancelar" onValidSubmit="Grabar" />
 
 
 @code {
 
-        private Producto producto = new Producto();
-        private Proveedor proveedor = new Proveedor();
+        private Venta venta = new Venta();
+        private Empleado empleado = new Empleado();
+         private Producto producto = new Producto();
       
 
     private async void Grabar()
 
 
     {
-        var httpRespuesta = await http.Post<Producto>("api/Productos", producto);
+        var httpRespuesta = await http.Post<Venta>("api/Ventas", venta);
         if (httpRespuesta.Error)
         {
             var body = httpRespuesta.HttpResponseMessage;
         }
-        navigationManager.NavigateTo("/Productos");
+        navigationManager.NavigateTo("/Ventas");
     }
 
     private void Cancelar()

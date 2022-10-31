@@ -1,0 +1,124 @@
+﻿@using Panaderia.BD.Data.Entidades
+@inject NavigationManager navigatioManager
+@using PanaderiaCliente.Client.Servicios
+
+
+
+<EditForm Model="venta" OnValidSubmit="onValidSubmit">
+    <DataAnnotationsValidator />
+
+        <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+        <label class="codigo venta">Codigo Venta</label>
+        <div class="txt1">
+
+            <InputText class="form-control" @bind-Value="@venta.CodigoVenta" />
+            <ValidationMessage For="@(()=> venta.CodigoVenta)" />
+        </div>
+
+        <label class="cantidad venta">Cantidad Venta </label>
+        <div class="txt2">
+
+            <InputText class="form-control" @bind-Value="@venta.CantidadVenta" />
+            <ValidationMessage For="@(()=> venta.CantidadVenta)" />
+        </div>
+
+        <label class="fecha venta">Fecha Venta</label>
+        <div class="txt3">
+
+            <InputText class="form-control" @bind-Value="@venta.FechaVenta" />
+            <ValidationMessage For="@(()=> venta.FechaVenta)" />
+        </div>
+
+      
+
+       <label class="cuotas venta">Cuotas Venta</label>
+        <div class="txt4">
+
+            <InputText class= "form-control" @bind-Value ="@venta.CuotasVenta" /> 
+               <ValidationMessage For="@(()=> venta.CuotasVenta)" />
+               
+                              
+        </div>
+
+
+           <label class="interes venta">Interes Venta</label>
+        <div class="txt5">
+
+            <InputText class= "form-control" @bind-Value ="@venta.InteresVenta" /> 
+               <ValidationMessage For="@(()=> venta.InteresVenta)" />
+               
+                              
+        </div>
+
+   
+           <label class="precio venta">Precio Venta</label>
+        <div class="txt6">
+
+            <InputText class= "form-control" @bind-Value ="@venta.PrecioVenta" /> 
+               <ValidationMessage For="@(()=> venta.PrecioVenta)" />
+               
+                              
+        </div>
+
+
+           <br />
+        <br />
+
+
+               <label class="empleado"> Empleado</label>
+        <div class="txt6">
+
+            <InputNumber class= "form-select" @bind-Value ="@venta.EmpleadoId" /> 
+               <ValidationMessage For="@(()=> venta.EmpleadoId)" />
+               
+                              
+        </div>
+
+
+           <br />
+        <br />
+
+
+
+               <label class="producto">Producto</label>
+        <div class="txt6">
+
+            <InputNumber class= "form-select" @bind-Value ="@venta.ProductoId" /> 
+               <ValidationMessage For="@(()=> venta.ProductoId)" />
+               
+                              
+        </div>
+
+
+           <br />
+        <br />
+
+
+
+
+    <div class="aceptar">
+   <button type="submit" class="btn btn-primary" >Aceptar</button>
+   </div>
+      <br />
+        <br />
+   <div class="cancelar">
+   <button  class="btn btn-secondary" @onclick="onCancel">Cancelar</button>
+   </div>
+
+</EditForm>
+
+@code {
+
+    [Parameter] public Producto producto { get; set; }
+    [Parameter] public Venta venta { get; set; }
+    [Parameter] public Empleado empleado { get; set; }
+    [Parameter] public EventCallback onValidSubmit { get; set; 
+}
+    [Parameter] public EventCallback onCancel { get; set; }
+}

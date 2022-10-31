@@ -3,11 +3,11 @@
 namespace Panaderia.BD.Data.Entidades
 {
 
-    
+    //[Index(nameof(DNIEmpleado), Name = "EmpleadoDNI_UQ", IsUnique = true)]
     public class Empleado 
     {
 
-        [Required]
+       
         public int Id { get; set; }
 
 
@@ -41,8 +41,7 @@ namespace Panaderia.BD.Data.Entidades
         [MaxLength(30, ErrorMessage = "La Fecha no debe superar los 10 caracteres")]
         public string FechaContratoEmpleado { get; set; }
 
-
-        [Required(ErrorMessage = "El Cargo es obligatorio")]
+            
         public int CargoId { get; set; }
         public Cargo Cargo { get; set; }
 

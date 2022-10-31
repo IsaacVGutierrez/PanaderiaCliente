@@ -21,7 +21,9 @@ namespace PanaderiaCliente.Server.Controllers
         public async Task<ActionResult<List<Cargo>>> Get()
         {
 
-            return await context.Cargos.ToListAsync();
+            return await context.Cargos
+                                     
+                                      .ToListAsync();
 
 
         }

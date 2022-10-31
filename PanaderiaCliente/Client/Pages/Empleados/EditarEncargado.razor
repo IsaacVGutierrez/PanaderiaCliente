@@ -1,0 +1,55 @@
+﻿@page "/EditarEncargado/{Id:int}"
+@using Panaderia.BD.Data.Entidades
+@using PanaderiaCliente.Client.Servicios
+@inject IHttpService http
+
+@inject NavigationManager navigationManager
+<h3>Editar Encargado</h3>
+
+    <Form_Encargado encargado="encargado" onCancel="Cancelar" onValidSubmit="Grabar" />
+
+@code {
+    private Encargado encargado = new Encargado();
+    [Parameter] public int Id { get; set; }
+
+  
+
+        protected async override Task OnInitializedAsync()
+    {
+        await Mostrar();
+    }
+
+    private async Task Mostrar()
+    {
+        var respuesta = await http.Get<Encargado>($"api/Encargados/{Id}");
+        if(respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        else
+        {
+            encargado = respuesta.Respuesta;
+        }
+    }
+    private async void Grabar()
+
+    {
+
+        var respuesta = await http.Put<Encargado>($"api/Encargados/{Id}", encargado);
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        navigationManager.NavigateTo("/Empleados");
+
+
+
+
+
+    }
+
+
+    private void Cancelar()
+    {
+    }
+}

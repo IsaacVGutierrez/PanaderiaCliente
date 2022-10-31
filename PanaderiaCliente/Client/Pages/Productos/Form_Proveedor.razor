@@ -1,0 +1,90 @@
+﻿@using Panaderia.BD.Data.Entidades
+@inject NavigationManager navigatioManager
+@using PanaderiaCliente.Client.Servicios
+
+
+<EditForm Model="proveedor" OnValidSubmit="onValidSubmit">
+    <DataAnnotationsValidator />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+        <label >Nombre</label>
+        <div class="txt1">
+
+            <InputText class="form-control" @bind-Value="@proveedor.NombreProved" />
+            <ValidationMessage For="@(()=> proveedor.NombreProved)" />
+        </div>
+
+        <label>DNI </label>
+        <div class="txt2">
+
+            <InputText class="form-control" @bind-Value="@proveedor.DNIProved" />
+            <ValidationMessage For="@(()=> proveedor.DNIProved)" />
+        </div>
+
+        <label >Direccion</label>
+        <div class="txt3">
+
+            <InputText class="form-control" @bind-Value="@proveedor.DireccionProved" />
+            <ValidationMessage For="@(()=> proveedor.DireccionProved)" />
+        </div>
+
+
+       <label >Telefono</label>
+        <div class="txt4">
+
+            <InputText class= "form-control" @bind-Value ="@proveedor.TelefonoProved" /> 
+               <ValidationMessage For="@(()=> proveedor.TelefonoProved)" />
+               
+                              
+        </div>
+
+
+           <label>Fecha entrega</label>
+        <div class="txt5">
+
+            <InputText class= "form-control" @bind-Value ="@proveedor.FechaEntregaProved" /> 
+               <ValidationMessage For="@(()=> proveedor.FechaEntregaProved)" />
+               
+                              
+        </div>
+
+   
+           <label>Encargado</label>
+        <div class="txt6">
+
+            <InputNumber class= "form-select" @bind-Value ="@proveedor.EncargadoId" /> 
+               <ValidationMessage For="@(()=> proveedor.EncargadoId)" />
+               
+                              
+        </div>
+
+        <br />
+        <br />
+
+
+
+    <div class="aceptar">
+   <button type="submit" class="btn btn-primary" >Aceptar</button>
+   </div>
+      <br />
+        <br />
+   <div class="cancelar">
+   <button  class="btn btn-secondary" @onclick="onCancel">Cancelar</button>
+   </div>
+
+</EditForm>
+
+@code {
+
+    //[Parameter] public Encargado encargado { get; set; }
+   // [Parameter] public Cargo cargo { get; set; }
+    [Parameter] public Proveedor proveedor { get; set; }
+    [Parameter] public EventCallback onValidSubmit { get; set; 
+}
+    [Parameter] public EventCallback onCancel { get; set; }
+}
