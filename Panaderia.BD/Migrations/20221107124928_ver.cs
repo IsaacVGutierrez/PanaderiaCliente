@@ -4,7 +4,7 @@
 
 namespace Panaderia.BD.Migrations
 {
-    public partial class inicio : Migration
+    public partial class ver : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

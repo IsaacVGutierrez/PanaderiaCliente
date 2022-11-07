@@ -1,0 +1,55 @@
+﻿@page "/EditarVentaCaja/{Id:int}"
+@using Panaderia.BD.Data.Entidades
+@using PanaderiaCliente.Client.Servicios
+@inject IHttpService http
+
+@inject NavigationManager navigationManager
+<h3>Editar Venta</h3>
+
+    <Form_Ventas venta="venta" onCancel="Cancelar" onValidSubmit="Grabar" />
+
+@code {
+    private Venta venta = new Venta();
+    [Parameter] public int Id { get; set; }
+
+  
+
+        protected async override Task OnInitializedAsync()
+    {
+        await Mostrar();
+    }
+
+    private async Task Mostrar()
+    {
+        var respuesta = await http.Get<Venta>($"api/Ventas/{Id}");
+        if(respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        else
+        {
+            venta = respuesta.Respuesta;
+        }
+    }
+    private async void Grabar()
+
+    {
+
+        var respuesta = await http.Put<Venta>($"api/Ventas/{Id}", venta);
+        if (respuesta.Error)
+        {
+            var body = respuesta.HttpResponseMessage;
+        }
+        navigationManager.NavigateTo("/Cajeros");
+
+
+
+
+
+    }
+
+
+    private void Cancelar()
+    {
+    }
+}

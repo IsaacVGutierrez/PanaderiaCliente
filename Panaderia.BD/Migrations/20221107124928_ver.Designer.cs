@@ -11,14 +11,14 @@ using Panaderia.BD.Data;
 namespace Panaderia.BD.Migrations
 {
     [DbContext(typeof(Bdcontext))]
-    [Migration("20221009025333_inicio")]
-    partial class inicio
+    [Migration("20221107124928_ver")]
+    partial class ver
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -298,7 +298,7 @@ namespace Panaderia.BD.Migrations
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Producto", b =>
                 {
                     b.HasOne("Panaderia.BD.Data.Entidades.Proveedor", "Proveedor")
-                        .WithMany()
+                        .WithMany("Productos")
                         .HasForeignKey("ProveedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -320,13 +320,13 @@ namespace Panaderia.BD.Migrations
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Venta", b =>
                 {
                     b.HasOne("Panaderia.BD.Data.Entidades.Empleado", "Empleado")
-                        .WithMany()
+                        .WithMany("Ventas")
                         .HasForeignKey("EmpleadoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Panaderia.BD.Data.Entidades.Producto", "Producto")
-                        .WithMany()
+                        .WithMany("Ventas")
                         .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -341,9 +341,24 @@ namespace Panaderia.BD.Migrations
                     b.Navigation("Empleados");
                 });
 
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Empleado", b =>
+                {
+                    b.Navigation("Ventas");
+                });
+
             modelBuilder.Entity("Panaderia.BD.Data.Entidades.Encargado", b =>
                 {
                     b.Navigation("Proveedores");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Producto", b =>
+                {
+                    b.Navigation("Ventas");
+                });
+
+            modelBuilder.Entity("Panaderia.BD.Data.Entidades.Proveedor", b =>
+                {
+                    b.Navigation("Productos");
                 });
 #pragma warning restore 612, 618
         }
