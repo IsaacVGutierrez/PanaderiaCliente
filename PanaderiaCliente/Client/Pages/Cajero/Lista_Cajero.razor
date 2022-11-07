@@ -1,12 +1,11 @@
 ﻿@using Panaderia.BD.Data.Entidades
 @using PanaderiaCliente.Client.Servicios
 @inject IHttpService http
-@page "/Productos"
+@inject NavigationManager navigationManager
+@page "/Cajeros"
 
 
 
-
-<h3>Lista Productos</h3>
 
 <html>
 
@@ -156,13 +155,7 @@
         padding: 20px;
     }
 
-    #textos h1 {
-        position: absolute;
-        font-size: 36px;
-        top: 113%;
-        left: 17%;
-        font-family: Helvetica;
-    }
+  
 
     header .labels {
         position: absolute;
@@ -287,7 +280,7 @@
         <input type="checkbox" id="btn-menu">
         <div class="cont-menu">
             <nav>
-                <a href="/">Pagina principal</a>
+                     <a href="/">Pagina principal</a>
                 <a href="/Productos">Productos</a>
                    <a href="/Empleados"> Empleados</a>
               <a href="/Ventas"> Ventas</a>
@@ -315,14 +308,6 @@
           
         </section>
 
-        <section id="textos">
-
-            <div>
-                <h1>Lista Productos</h1>
-            </div>
-
-       
-        </section>
 
     </header>
 
@@ -337,21 +322,32 @@
 
 
 
+  
 
-
-   <br />
+      
+ <br />
         <br />
         <br />
         <br />
-
-<a class="btn btn-primary" href="/Registrar_Producto">registrar nuevo producto</a>
-
-   <br />
+         <br />
         <br />
+       
+        <section id="textos">
 
+            <div>
+                <h3>Lista Productos</h3>
+            </div>
+
+       
+        </section>
+
+    
+
+     <br />
+        <br />
 <table>
     <tr>
-          <th>Id</th>
+             <th>Id</th>
         <td></td>
         <td></td>
         <td></td>
@@ -360,26 +356,28 @@
         <td></td>
         <td></td>
         <td></td>
-        <th>  Precio</th>
+        <th>Precio</th>
         <td></td>
          <td></td>
           <td></td>
-        <td></td>
-        <th>  Codigo</th>
-        <td></td>
+        <th>Codigo</th>
         <td></td>
         <td></td>
-         <th>  Vencimiento</th>
         <td></td>
         <td></td>
-         <th>  Cantidad</th>
+         <th>Vencimiento</th>
         <td></td>
         <td></td>
-        <th>  Proveedor</th>
-         <td></td>
+        <td></td>
+        <th>Cantidad</th>
         <td></td>
         <td></td>
-         <th></th>
+        <td></td>
+        <td></td>
+        <th>Proveedor</th>
+        <td></td>
+        <td></td>
+       
          
     </tr>
     @if (productos==null )
@@ -395,8 +393,7 @@
          @foreach (var item in productos )
         {
             <tr>
-
-                  <td>@item.Id</td>
+                 <td>@item.Id</td>
                 <td></td>    
                 <td></td>
                 <td></td>
@@ -408,29 +405,30 @@
                 <td>@item.PrecioProduc</td>
                 <td></td>
                 <td></td>
+                <td></td>
                 <td>@item.CodigoProduc</td>
                 <td></td>
                 <td></td>
-                  <td></td>
-                    <td>@item.FechaVencimientoProduc</td>
-                    <td></td>
-                  <td></td>
-                   <td>@item.CantidadProduc</td>
+                <td></td>
+                <td></td>
+                <td>@item.FechaVencimientoProduc</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>@item.CantidadProduc</td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>@item.Proveedor.NombreProved
                 <td></td>
                 <td></td>
-             <td></td>
-        <td></td>
-         <th></th>
-           <td></td>
+                <th></th>
                 <td></td>
-                <td>
-                    <a class="btn btn-primary"
+                        <td>  <a class="btn btn-primary"
                        href="Editar/@item.Id">
                         Editar
                     </a>
-                </td>
+                        </td>
 
 
                   @* <td>
@@ -448,105 +446,126 @@
     }
   </table>
     
-   <br />
+
+
+
+
+
+
+
+
+  
+       <br />
         <br />
 
 
-         <h3>Lista Entrega Proveedores</h3>
+         <h3>Lista Ventas</h3>
 
 
              <br />
-             <a class="btn btn-primary" href="/Registrar_Proveedor">registrar nueva entrega</a>
+             <a class="btn btn-primary" href="/Registrar_Venta">registrar nueva venta</a>
         <br />
          <br />
 
+ 
   <table>
                <tr>
-
-                       <th>Id Proveedor</th>
+        <th> CodigoVenta</th>
         <td></td>
         <td></td>
         <td></td>
-         <th> Proveedor </th>
+        <th>CantidadVenta</th>
         <td></td>
         <td></td>
-        <th>  Fecha de entrega</th>
+        <td></td>
+        <th>FechaVenta</th>
+        <td></td>
+        <td></td>
+        <td></td>
          <td></td>
-        <td></td>
-        <th> Recibido Encargado</th>
-         <td></td>
+        <th>CuotasVenta</th>
         <td></td>
         <td></td>
-         <th>  DNI</th>
          <td></td>
+        <th>InteresVenta</th>
         <td></td>
-         <th>  Telefono</th>
-         <td></td>
-          <td></td>
-        <th>  Direccion </th>
-         <td></td>
-             <td>
-                
-                </td>
-
+        <td></td>
+        <th> PrecioVenta</th>
+        <td></td>
+        <td></td>
+        <th>  Empleado</th>
+        <td></td>
+        <td></td>
+        <th>  Producto</th>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
 
 
 
-      @if ( proveedores==null)
+      @if ( ventas==null)
     {
         <tr>Cargando......</tr>
     }
-    else if ( proveedores.Count ==0)
+    else if ( ventas.Count ==0)
     {
         <tr>No existen datos</tr>
     }
     else
     {
 
-         @foreach(var item in proveedores)
+         @foreach(var item in ventas)
          { <tr>
-
-               <td>@item.Id</td>
+                <td>@item.CodigoVenta</td>
                 <td></td>    
                 <td></td>
                 <td></td>
-                <td>@item.NombreProved</td>
-                <td></td>    
-                <td></td>
-                <td>@item.FechaEntregaProved</td>
+                <td>@item.CantidadVenta</td>
                 <td></td>
                 <td></td>    
-                <td>@item.Encargado.NombreEncargado</td>
+                <td></td>
+                <td>@item.FechaVenta</td>
                 <td></td>
                 <td></td>
-                <td></td>@item.DNIProved
                 <td></td>
-               <td></td>@item.TelefonoProved
-                 <td></td>
-                 <td></td>@item.DireccionProved
-                     <td></td>
-                         <a class="btn btn-primary"
-                       href="EditarProveedor/@item.Id">
+                <td></td>@item.CuotasVenta
+                <td></td>
+                <td></td>
+                <td></td>@item.InteresVenta
+                <td></td>
+                <td></td>
+                <td>@item.PrecioVenta</td>
+                <td></td>
+                <td></td>@item.Empleado.NombreEmpleado
+                <td></td>
+                <td></td>@item.Producto.NombreProduc
+                <td></td>
+                <td></td>
+                <td></td>
+                         <td>
+                    <a class="btn btn-primary"
+                       href="EditarVenta/@item.Id">
                         Editar
                     </a>
-        <td></td>
+                </td>
            </tr>
          }
       }
 
-      </table>      
-
-      
-
+      </table>
+       <br />
 
 
 
 
 @code {
     List<Producto> productos;
-    List<Proveedor> proveedores;
-    List<Encargado> Encargados;
+    List<Venta> ventas;
+    List<Encargado> encargados;
+     List<Proveedor> proveedores;
+       List<Cargo> cargos;
+          List<Empleado> empleados;
 
 
 
@@ -555,6 +574,7 @@
         base.OnInitializedAsync();
         await Leer();
         await Leer1();
+       
     }
 
     private async Task Leer()
@@ -574,15 +594,14 @@
 
        {
 
-        var respuesta = await http.Get<List<Proveedor>>("api/Proveedores");
+        var respuesta = await http.Get<List<Venta>>("api/Ventas");
         
         if (!respuesta.Error)
        {
-          proveedores = respuesta.Respuesta;
+          ventas = respuesta.Respuesta;
         }
 
      }
-
 
 
 

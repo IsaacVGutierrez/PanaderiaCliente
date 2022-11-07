@@ -45,6 +45,8 @@ namespace Panaderia.BD.Data.Entidades
         public int CargoId { get; set; }
         public Cargo Cargo { get; set; }
 
-       
+
+        // public List<Venta> Ventas { get; set; }
+
     }
 }

@@ -37,7 +37,7 @@
 
     #banner h1{
 
-    position: fixed;
+    position: absolute;
     top: 25px;
     left: 250px;
     font-size: 50px;
@@ -56,7 +56,7 @@
 
 }
 #espacio {
-    position: fixed;
+    position: absolute;
     left: 1603px;
     top: 70px;
     width: 204px;
@@ -150,6 +150,43 @@
 
 
 }
+
+ #banner a {
+        padding: 20px;
+    }
+    #banner nav{
+       display: flex;
+    position: fixed;
+    left: 891px;
+    top: 59px;
+    text-decoration: none;
+}
+
+ #banner h1 {
+        position: fixed;
+        top: 25px;
+        left: 250px;
+        font-size: 50px;
+        font-family: Helvetica;
+        text-shadow: 5px 1.5px 10px #494949;
+    }
+
+    
+    #banner nav :hover {
+        color: dimgrey;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+        padding: 20px;
+    }
+
+
+
+
+
+
 #textos h1{
        position: absolute;
     font-size: 36px;
@@ -158,16 +195,34 @@
     font-family: Helvetica;
 
 }
-#banner nav{
-       display: flex;
-    position: fixed;
-    left: 891px;
-    top: 59px;
+
+
+}
+
+       .cajero {
+    position: fixed ;
+    left: 100px;
+    top : 170px;
+    font-size: 17px;   
+
+                 }
+
+     .cajero a {
+
+    color: white;
     text-decoration: none;
-}
+    background-color: rgb(84, 84, 245);
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+    border-color: rgb(131, 129, 129);
+    border: 2px solid rgb(131, 129, 129);
+    cursor: pointer;
+    padding: 20px;
 
+        }    
 
-}
 
    .registro {
     position: absolute ;
@@ -262,6 +317,30 @@
 
        
 
+        .boton-cajero label{
+        color: white;
+        color: white;
+        background-color: rgb(84, 84, 245);
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 10px;
+        position: fixed;
+        top: 168px;
+        left: 200px;
+        border-color: rgb(131, 129, 129);
+        border: 2px solid rgb(131, 129, 129);
+        cursor: pointer;
+        width: 128px;
+
+    }
+         .boton-cajero a:hover{
+
+            color:coral;
+
+        }
+
+
 
     </style>
 
@@ -331,7 +410,7 @@
             </section>
           
 
-
+         
 
           @*  <div class="boton-sesion">
 
@@ -363,3 +442,36 @@
 
 
     </html> 
+
+
+     
+            
+
+      <br />
+          <br />
+           <br />
+           <br />
+             <br />
+          <br />
+           <br />
+                                  <h3>Sesion Cajero</h3>
+                                   <br />
+        <td></td>
+        <td></td>   <a class="btn btn-primary" href="Cajeros"> CAJERO</a>
+
+           <br />
+            <br />
+
+
+             <h3>Sesion Encargado</h3>
+
+                 
+           <br />
+        
+        <td></td>
+        <td></td>   <a class="btn btn-primary" href="Empleados"> EMPLEADOS</a>
+          <td></td>   <a class="btn btn-primary" href="Productos"> PRODUCTOS / PROVEEDOR</a>
+
+
+           <br />
+            <br />

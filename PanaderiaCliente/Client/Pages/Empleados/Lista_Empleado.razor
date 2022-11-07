@@ -281,7 +281,7 @@
         <div class="cont-menu">
             <nav>
                      <a href="/">Pagina principal</a>
-                <a href="/Productos">Mis productos</a>
+                <a href="/Productos">Productos</a>
                    <a href="/Empleados"> Empleados</a>
               <a href="/Ventas"> Ventas</a>
             </nav>
@@ -349,6 +349,11 @@
         <br />
 <table>
     <tr>
+
+           <th>Id</th>
+        <td></td>
+        <td></td>
+        <td></td>
         <th>Nombre</th>
         <td></td>
         <td></td>
@@ -375,7 +380,7 @@
         <th>Direccion</th>
         <td></td>
         <td></td>
-        <th>Fecha De Contrado</th>
+        <th>Fecha De Contrato</th>
         <td></td>
         <td></td>
         <td></td>
@@ -399,7 +404,10 @@
          @foreach (var item in empleados )
         {
             <tr>
-
+                 <td>@item.Id</td>
+                <td></td>    
+                <td></td>
+                <td></td>
                 <td>@item.NombreEmpleado</td>
                 <td></td>
                 <td></td>
@@ -538,6 +546,11 @@
 
   <table>
                <tr>
+
+                          <th>Id</th>
+        <td></td>
+        <td></td>
+        <td></td>
         <th>Nombre Encargado</th>
         <td></td>
         <td></td>
@@ -585,6 +598,11 @@
 
          @foreach(var item in encargados)
          { <tr>
+
+                <td>@item.Id</td>
+                <td></td>    
+                <td></td>
+                <td></td>
                 <td>@item.NombreEncargado</td>
                 <td></td>    
                 <td></td>

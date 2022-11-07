@@ -37,8 +37,8 @@ namespace Panaderia.BD.Data.Entidades
 
         public Proveedor Proveedor { get; set; }
 
-       
-        
+        //public List<Venta> Ventas { get; set; }
+
 
     }
 
